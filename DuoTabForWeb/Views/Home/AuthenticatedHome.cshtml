@@ -1,0 +1,43 @@
+﻿@using DuoTabForWeb.ViewModels
+@using DuoTabForWeb.Models
+@model DuoTabForWeb.ViewModels.BalanceViewModel
+@{
+    ViewBag.Title = "AuthenticatedHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    @{
+        // Check if there is currently no owing balance
+        if (Model.CurrencyValue == 0)
+        {
+            <h4>Neither partner is currently owing.</h4>
+            <h1>$@Model.CurrencyValue</h1>
+        }
+        else
+        {
+            // If there is an owing balance, see which partner owes which
+            if (Model.IsPartnerOwing)
+            {
+                <h4> Your partner owes you:</h4>
+            }
+            else
+            {
+                <h4> You owe your partner:</h4>
+            }
+
+            <h1>$@Model.CurrencyValue</h1>
+        }
+    }
+
+    @{
+        // TODO: Include abbreviated expense history here from DB, and a link to view more
+    }
+    <br />
+    <p>
+        <a href="#" class="btn btn-success">Add Expense</a>
+        <a href="#" class="btn btn-default">Forgive Debts</a>
+    </p>
+</div>
+
+
