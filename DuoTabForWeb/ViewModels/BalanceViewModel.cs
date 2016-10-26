@@ -66,5 +66,27 @@ namespace DuoTabForWeb.ViewModels
                 return CurrentBalance.BalanceInCents >= 0;
             }
         }
+
+        /// <summary>
+        /// Returns the preface text disclosing which parnter (if either) is currently owing
+        /// </summary>
+        public string OwingText
+        {
+            get
+            {
+                if (CurrentBalance.BalanceInCents == 0)
+                {
+                    return "Neither partner is currently owing:";
+                }
+                else if (IsPartnerOwing)
+                {
+                    return "Your partner owes you:";
+                }
+                else
+                {
+                    return "You owe your partner:";
+                }
+            }
+        }
     }
 }
