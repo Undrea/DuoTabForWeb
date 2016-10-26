@@ -1,0 +1,49 @@
+﻿@using DuoTabForWeb.ViewModels;
+@using DuoTabForWeb.Models;
+
+@model DuoTabForWeb.ViewModels.TransactionViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h2 class="text-center">Transaction Record</h2>
+    <br />
+   
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Amount</h3>
+        </div>
+        <div class="panel-body">
+            <h1>$@Model.CurrentTransaction.Amount</h1>
+            <h5>@Model.SplitInformation</h5>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Date</div>
+        <div class="panel-body">
+            <h5>@Model.CurrentTransaction.Date.ToString("MMM d, yyyy")</h5>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Paid by</div>
+        <div class="panel-body">
+            <h5>@Model.CurrentTransaction.User</h5>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Expense Type</div>
+        <div class="panel-body">
+            <h5>@Model.CurrentTransaction.Type</h5>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Notes</div>
+        <div class="panel-body">
+            <h5>@Model.CurrentTransaction.Notes</h5>
+        </div>
+    </div>
+</div>
+
+<a href="/" class="btn btn-primary">Return Home</a>

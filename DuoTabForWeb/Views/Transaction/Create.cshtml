@@ -1,0 +1,68 @@
+﻿@using DuoTabForWeb.ViewModels;
+@using DuoTabForWeb.Models;
+
+@model DuoTabForWeb.Models.Transaction
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h2>Make a New Transaction</h2>
+        <fieldset>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        @{var currencyFormat = String.Format("{0:0.00}", Model.Amount);}
+                        @Html.TextBoxFor(m => m.Amount, currencyFormat, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Date, "{0:dd/MM/yyyy}", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.User, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.User, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Split, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{var splitFormat = String.Format("{0:0.00}", Model.Split);}
+                    @Html.TextBoxFor(m => m.Split, splitFormat, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes,
+                htmlAttributes: new { @class = "col-lg-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Notes, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Publish Transaction" />
+        </fieldset>
+    </div>
+                        }
