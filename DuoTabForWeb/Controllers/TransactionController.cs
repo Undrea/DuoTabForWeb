@@ -10,11 +10,13 @@ namespace DuoTabForWeb.Controllers
 {
     public class TransactionController : Controller
     {
-        // GET: Transaction
-        public ActionResult Details(Transaction transaction)
         {
-            // Wrap in a View Model
-            return View("Details", new TransactionViewModel(transaction));
+        {
+           // Wrap in a View Model
+           var db = new TransactionsDataContext();
+           var transaction = db.Transactions.Find(id);
+
+           return View("Details", new TransactionViewModel(transaction));
         }
 
         [HttpGet]
@@ -34,11 +36,13 @@ namespace DuoTabForWeb.Controllers
         [HttpPost]
         public ActionResult Create(Transaction transaction)
         {
-            // TODO: Perform validation
             if (ModelState.IsValid)
             {
-                // TODO: Save model to DB
-                return RedirectToAction("Details", transaction);
+                var db = new TransactionsDataContext();
+                db.Transactions.Add(transaction);
+                db.SaveChanges();
+
+                return RedirectToAction("Details", new { transaction.Id } );
             } else
             {
                 return View(transaction); // TODO: Display errors
