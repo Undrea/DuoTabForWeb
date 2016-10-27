@@ -10,7 +10,20 @@ namespace DuoTabForWeb.Controllers
 {
     public class TransactionController : Controller
     {
+        /// <summary>
+        /// Show all transactions. TODO: Just for the authenticated user.
+        /// </summary>
+        public ActionResult Index()
         {
+            // TODO: Pull transactions by order of date DESC
+            var db = new TransactionsDataContext();
+            var transactions = db.Transactions.ToArray(); // Execute SQL call now
+            var viewModels = transactions.Select(m => new TransactionViewModel(m)).ToArray();
+
+            return View(new TransactionsIndexViewModel(viewModels));
+        }
+
+        public ActionResult Details(int id)
         {
            // Wrap in a View Model
            var db = new TransactionsDataContext();
