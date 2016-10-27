@@ -27,18 +27,42 @@ namespace DuoTabForWeb.ViewModels
             {
                 if (CurrentTransaction.Split == 0)
                 {
-                    return CurrentTransaction.User.ToString() + "paid, but is owed 100% of of this expense.";
+                    switch(CurrentTransaction.User)
+                    {
+                        case Enums.UserType.Me:
+                            return "I paid, but my partner owes me 100% of this expense.";
+                        case Enums.UserType.Partner:
+                            return "My partner paid, but I owe 100% of this expense.";
+                        default:
+                            return "";
+                    }
                 }
                 else if (CurrentTransaction.Split == 1)
                 {
-                    return CurrentTransaction.User.ToString() + "paid, and is owed 100% of this expense.";
+                    switch (CurrentTransaction.User)
+                    {
+                        case Enums.UserType.Me:
+                            return "I paid, and will cover 100% of this expense.";
+                        case Enums.UserType.Partner:
+                            return "My partner paid, and will cover 100% of this expense.";
+                        default:
+                            return "";
+                    }                    
                 }
                 else
                 {
                     var splitPaidByPayer = Math.Round(CurrentTransaction.Amount * CurrentTransaction.Split, 2);
                     var percentPaidByPayer = Math.Round(CurrentTransaction.Split * 100, 0);
 
-                    return "With a " + percentPaidByPayer + "% split, the payer (" + CurrentTransaction.User.ToString().ToLower() + ") will only cover $" + splitPaidByPayer + ".";
+                    switch (CurrentTransaction.User)
+                    {
+                        case Enums.UserType.Me:
+                            return "I paid with a " + percentPaidByPayer + "% split, so I will cover cover $" + splitPaidByPayer + " of this expense.";
+                        case Enums.UserType.Partner:
+                            return "My partner paid with a " + percentPaidByPayer + "% split, so I will cover $" + (CurrentTransaction.Amount - splitPaidByPayer) + " of this expense.";
+                        default:
+                            return "";
+                    }
                 }
             }           
         }
