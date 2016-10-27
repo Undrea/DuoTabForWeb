@@ -16,7 +16,7 @@
             <h3 class="panel-title">Amount</h3>
         </div>
         <div class="panel-body">
-            <h1>$@Model.CurrentTransaction.Amount</h1>
+            <h1>@Model.CurrentTransaction.Amount.ToString("C")</h1>
             <h5>@Model.SplitInformation</h5>
         </div>
     </div>
@@ -46,4 +46,5 @@
     </div>
 </div>
 
-<a href="/" class="btn btn-primary">Return Home</a>
+@Html.ActionLink("Return Home", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary" })
+@Html.ActionLink("See All", "Index", "Transaction", null, htmlAttributes: new { @class = "btn btn-default" })
