@@ -1,0 +1,25 @@
+﻿@using DuoTabForWeb.ViewModels
+@using DuoTabForWeb.Models
+
+@model DuoTabForWeb.ViewModels.BalanceViewModel
+@{
+    ViewBag.Title = "AuthenticatedHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    @{
+// TODO: Include abbreviated expense history here from DB, and a link to view more
+    }
+    <h4>@Model.OwingText</h4>
+    <h1>$@Model.CurrencyValue</h1>
+    <br />
+    <p>
+        @Html.ActionLink("Add Expense", "Create", "Transaction", null, htmlAttributes: new { @class = "btn btn-success" })
+        @*
+        TODO: Add "Forgive Debts" feature.
+        *@
+        @Html.ActionLink("Forgive Debts", "#", "#", htmlAttributes: new { @class = "btn btn-default" })
+        @Html.ActionLink("Transaction History", "Index", "Transaction", null, htmlAttributes: new { @class = "btn btn-default" })        
+    </p>
+</div>

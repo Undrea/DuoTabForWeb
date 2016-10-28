@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DuoTabForWeb.ViewModels;
+using DuoTabForWeb.Models;
 
 namespace DuoTabForWeb.Controllers
 {
@@ -10,7 +12,14 @@ namespace DuoTabForWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                // TODO: Load user's actual balance from and save to DB
+                return View("AuthenticatedHome", new BalanceViewModel(new Balance(10.99f)));
+            } else
+            {
+                return View();
+            }            
         }
 
         public ActionResult About()
